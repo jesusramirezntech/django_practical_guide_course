@@ -10,5 +10,6 @@ urlpatterns = [
     
     #THe third parameter is the label name that the path would be reference with
     path("<int:month>", views.monthly_challenge_by_number),
-    path("<str:month>", views.monthly_challenge, name="month-challenge")
+    path("<str:month>", views.monthly_challenge, name="month-challenge"),
+    path("", views.index)
 ]

@@ -38,7 +38,21 @@ def monthly_challenge_by_number(request, month):
 def monthly_challenge(request, month):
     
     try:
-        return HttpResponse(monthly_challenges[month])
+        challenge_text = monthly_challenges[month]
+        response_data = f"<h1>{challenge_text}</h1>"
+        return HttpResponse(response_data)
     except:
         return HttpResponseNotFound("This path is not supported")
 
+def index(request):
+    list_items = ""
+    months = monthly_challenges.keys()
+    
+    for month in months:
+        month_path = reverse("month-challenge", args=[month])
+        list_items += f"<li><a href='{month_path}'>{month.capitalize()}</a></li>"
+        
+        
+    html_list = f"<ul>{list_items}</ul>"
+    
+    return HttpResponse(html_list)
