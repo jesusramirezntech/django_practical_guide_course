@@ -61,4 +61,6 @@ def index(request):
         
     html_list = f"<ul>{list_items}</ul>"
     
-    return HttpResponse(html_list)
+    return render(request,"challenges/index.html", {
+        "months" : months
+    })
