@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+#renders the html template as text so it can be sent as http response
+from django.template.loader import render_to_string
 
 monthly_challenges = {
     "january" : "This is january",
@@ -39,8 +41,12 @@ def monthly_challenge(request, month):
     
     try:
         challenge_text = monthly_challenges[month]
-        response_data = f"<h1>{challenge_text}</h1>"
-        return HttpResponse(response_data)
+        #response_data = f"<h1>{challenge_text}</h1>"
+        #return HttpResponse(render_to_string("challenges/challenge.html"))
+        #THe following is the same as the two lines above
+        return render(request, "challenges/challenge.html",{
+            "text" : challenge_text
+        })
     except:
         return HttpResponseNotFound("This path is not supported")
 
