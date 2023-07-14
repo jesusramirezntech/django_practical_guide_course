@@ -1,5 +1,8 @@
 <header>
     <nav>
         <a href="{% url "index" %}">All challenges</a>
+        {% if active_page %}
+            <h2>{{active_page}}</h2
+        {%endif%}
     </nav>
 </header>
