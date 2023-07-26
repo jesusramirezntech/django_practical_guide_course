@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 #renders the html template as text so it can be sent as http response
 from django.template.loader import render_to_string
@@ -48,7 +48,8 @@ def monthly_challenge(request, month):
             "text" : challenge_text
         })
     except:
-        return HttpResponseNotFound("This path is not supported")
+        #This takes automagically the 404.htmk template to be rendered
+        raise Http404()
 
 def index(request):
     list_items = ""
